@@ -1,0 +1,27 @@
+table {
+    position: absolute;
+}
+
+.cell {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: 1.5em;
+    color: black;
+}
+
+.mark {
+    background-color: green;
+}
+
+.hidden {
+    display: none;
+}
+
+.mark {
+    background-color: lightpink;
+}
+
+.renderedCell {
+    color: red;
+}
