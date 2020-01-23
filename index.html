@@ -9,11 +9,28 @@
     <link rel="stylesheet" href="css/app.css" />
 
 </head>
+<h1>Minesweeper - Soko</h1>
+<div>Seconds counted:<span class="timer"></span></div>
+<div>
+    <h2> <button class="show" onclick="initGame(this)">🙂</button>
+        <button class="hidelost" onclick="initGame(this)">☹️</button>
+        <button class="hidevictory" onclick="initGame(this)">😎</button>
+    </h2>
+    <button class="lamp1" onclick="isHint(this)">💡</button>
+    <button class="lamp2" onclick="isHint(this)">💡</button>
+    <button class="lamp3" onclick="isHint(this)">💡</button>
+</div>
+<div class="level">
+    <button class="easy" onclick="initGame(this)"></button>
+    <button class="hard" onclick="initGame(this)"></option>
+    <button class="extreme" onclick="initGame(this)"></button>
+</div>
 
-<body onload="initGame()">
+<body onload="initGame(this)">
     <div class="board-container"></div>
-    <script src="js/util.js"></script>
-    <script src="js/game.js"></script>
+    <div>
+        <script src="js/util.js"></script>
+        <script src="js/game.js"></script>
 </body>
 
 </html>

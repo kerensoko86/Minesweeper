@@ -12,14 +12,14 @@ function getRandomIntInclusive(min, max) {
 }
 
 function printMat(mat, selector) {
-    var strHTML = '<table border="2"><tbody>';
+    var strHTML = '<table border="2" oncontextmenu= "return false"><tbody>';
     for (var i = 0; i < mat.length; i++) {
         strHTML += '<tr>';
         for (var j = 0; j < mat[0].length; j++) {
             var cell = mat[i][j];
             var tdId = `cell-${i}-${j}`;
             var className = `cell cell${i}-${j}`;
-            strHTML += `<td id="${tdId}" onclick="cellClicked(this)" class="${className}" class="renderedCell" ><span >${cell}</span></td>`
+            strHTML += `<td id="${tdId}" onmousedown="cellClicked(this, ${i}, ${j}, event)" class="${className}">${cell}</td>`
         }
         strHTML += '</tr>'
     }
@@ -30,9 +30,9 @@ function printMat(mat, selector) {
     return mat;
 }
 
-function renderCell(location, value) {
+function renderCellHide(location, value) {
     // Select the elCell and set the value
     var elCell = document.querySelector(`.cell${location.i}-${location.j}`);
-    console.log(elCell);
+    elCell.isShown = true;
     elCell.innerHTML = value;
 }

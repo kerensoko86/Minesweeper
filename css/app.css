@@ -1,5 +1,11 @@
-table {
-    position: absolute;
+body {
+    margin: 0 auto;
+    text-align: center;
+    background-color: blueviolet;
+}
+
+.board-containter {
+    color: blue;
 }
 
 .cell {
@@ -7,21 +13,55 @@ table {
     height: 40px;
     text-align: center;
     font-size: 1.5em;
-    color: black;
-}
-
-.mark {
-    background-color: green;
-}
-
-.hidden {
-    display: none;
+    color: white;
+    background-color: blue;
+    border: 2px greenyellow;
 }
 
 .mark {
     background-color: lightpink;
+    color: black;
 }
 
 .renderedCell {
     color: red;
+}
+
+.show {
+    margin: auto;
+}
+
+.hidevictory {
+    display: none;
+    margin: auto;
+}
+
+.hidelost {
+    display: none;
+    margin: auto;
+}
+
+.lamp1 {
+    display: inline-block;
+    margin: auto;
+}
+
+.lamp2 {
+    display: inline-block;
+    margin: auto;
+}
+
+.lamp3 {
+    display: inline-block;
+    margin: auto;
+}
+
+table {
+    margin: auto;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.level {
+    margin: auto;
 }
