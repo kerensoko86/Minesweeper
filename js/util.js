@@ -36,3 +36,23 @@ function renderCellHide(location, value) {
     elCell.isShown = true;
     elCell.innerHTML = value;
 }
+
+function toggleDarkLight() {
+    var body = document.querySelector("#body");
+    var currentClass = body.className;
+    body.className = currentClass == "dark-mode" ? "light-mode" : "dark-mode";
+}
+
+function storageTime(newGameTime) {
+
+    gameTime = localStorage.getItem("gameTime");
+    if (!gameTime) {
+        localStorage.setItem("gameTime", newGameTime);
+        document.querySelector('#gametime').innerHTML = gameTime;
+    } else {
+        if (newGameTime < gameTime) {
+            localStorage.setItem("gameTime", newGameTime);
+        }
+    }
+    document.querySelector('#gametime').innerHTML = gameTime;
+}

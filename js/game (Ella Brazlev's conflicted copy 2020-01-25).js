@@ -30,10 +30,9 @@ function initGame(elBtn) {
     if (elBtn.innerText === 'Easy') {
         gLevel.SIZE = 4;
         gLevel.MINES = 2;
-        gLives = 1;
-        document.querySelector(`.live1`).style.display = 'inline';
-        for (var i = 2; i < 4; i++) {
-            document.querySelector(`.live${i}`).style.display = 'none';
+        gLives = 2;
+        for (var i = 0; i < 2; i++) {
+            document.querySelector(`.live${i}`).style.display = 'block';
         }
 
     } else if (elBtn.innerText === 'Hard') {
@@ -41,7 +40,7 @@ function initGame(elBtn) {
         gLevel.MINES = 12;
         gLives = 3;
         for (var i = 1; i < 4; i++) {
-            document.querySelector(`.live${i}`).style.display = 'inline';
+            document.querySelector(`.live${i}`).style.display = 'block';
         }
 
     } else if (elBtn.innerText === 'Extreme') {
@@ -49,7 +48,7 @@ function initGame(elBtn) {
         gLevel.MINES = 30;
         gLives = 4;
         for (var i = 1; i < 5; i++) {
-            document.querySelector(`.live${i}`).style.display = 'inline';
+            document.querySelector(`.live${i}`).style.display = 'block';
         }
 
     };
@@ -152,7 +151,7 @@ function cellClicked(elCell, i, j, event) {
         }
 
         if (gBoard[i][j].value === EMPTY) {
-            // gBoard[i][j].isShown = true;
+            gBoard[i][j].isShown = true;
             expandShown(gBoard, i, j);
             if (checkGameOver()) {
                 victory();
@@ -233,40 +232,35 @@ function getSelector(elCell, i, j) {
 /*****************************************/
 function checkGameOver() {
     var count = gLevel.SIZE ** 2 - gLevel.MINES;
+    console.log(gLevel.MINES);
+
     var openCells = document.querySelectorAll('.mark').length;
+
     return ((count === openCells) && (gGame.markedCount === gLevel.MINES));
 }
 /*****************************************/
 function loseGame() {
     document.querySelector('.show').style.display = 'none';
-    document.querySelector('.hidelost').style.display = 'inline';
+    document.querySelector('.hidelost').style.display = 'block';
     gGame.isOn = false;
     clearInterval(gTimerId);
 }
 
 /*****************************************/
 function expandShown(board, rowI, colJ) {
-    if (board[rowI][colJ].value === EMPTY && !board[rowI][colJ].isShown) {
-        renderCell({ i: rowI, j: colJ }, board[rowI][colJ].value);
-        board[rowI][colJ].isShown = true;
-    } else if (board[rowI][colJ].value !== MINE) {
-        renderCell({ i: rowI, j: colJ }, board[rowI][colJ].value);
-        board[rowI][colJ].isShown = true;
-        return;
-    }
-
     for (var i = rowI - 1; i <= rowI + 1; i++) {
         if (i < 0 || i >= board.length) continue;
         for (var j = colJ - 1; j <= colJ + 1; j++) {
             if (j < 0 || j >= board[0].length) continue;
             if (i === rowI && j === colJ) continue;
+            renderCell({ i: i, j: j }, board[i][j].value);
 
-            expandShown(board, i, j);
+            // if (gBoard[i][j] === EMPTY) {
+            //     expandShown(board, i, j);
+            // }
         }
-
     }
 }
-
 
 
 /*****************************************/
@@ -277,7 +271,7 @@ function timer() {
 /*****************************************/
 function victory() {
     document.querySelector('.show').style.display = 'none';
-    document.querySelector('.hidevictory').style.display = 'inline';
+    document.querySelector('.hidevictory').style.display = 'block';
     gGame.isOn = false;
     var gameTime = gGame.secsPassed;
     storageTime(gGame.secsPassed);
@@ -295,6 +289,7 @@ function isHint() {
 }
 /*****************************************/
 function showCells(board, rowI, colJ) {
+    //debugger
     for (var i = rowI - 1; i <= rowI + 1; i++) {
         if (i < 0 || i >= board.length) continue;
         for (var j = colJ - 1; j <= colJ + 1; j++) {
@@ -332,15 +327,11 @@ function safeClick() {
             renderCellHide({ i: i, j: j }, EMPTY);
         }, 1000);
     }
-    document.querySelector(`.safe${gSafeClickcount}`).style.display = 'none';
     gSafeClickcount--;
-    document.querySelector(`.safe${gSafeClickcount}`).style.display = 'inline';
-
 }
 /*****************************************/
 
 function reset() {
-
     gFirst = 1;
     gCountHints = 3;
     gSafeClickcount = 3;
@@ -353,12 +344,12 @@ function reset() {
         isHint: false,
     }
 
-    document.querySelector('.show').style.display = 'inline';
+    document.querySelector('.show').style.display = 'block';
     document.querySelector('.hidevictory').style.display = 'none';
     document.querySelector('.hidelost').style.display = 'none';
 
     for (var i = 1; i < 4; i++) {
-        document.querySelector(`.lamp${i}`).style.display = 'inline';
+        document.querySelector(`.lamp${i}`).style.display = 'block';
     }
 
     gBoard = initalEmptyBoard(gBoard);
